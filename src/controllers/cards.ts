@@ -21,7 +21,7 @@ export const createCard = (
 };
 
 export const deleteCard = (req: Request, res: Response, next: NextFunction) =>
-  Card.findByIdAndDelete(req.params.cardId)
+  Card.findById(req.params.cardId)
     .then((card) => {
       if (!card) {
         return Promise.reject(new NotFoundError('Card not found'));
@@ -33,7 +33,8 @@ export const deleteCard = (req: Request, res: Response, next: NextFunction) =>
         );
       }
 
-      return res.send(card);
+      return Card.findByIdAndDelete(req.params.cardId)
+        .then(() => res.send({ message: 'Card deleted' }));
     })
     .catch(next);
 
