@@ -1,8 +1,15 @@
-export class NotFoundError extends Error {
+import {
+  INVALID_REQUEST_ERROR_CODE,
+  INVALID_REQUEST_ERROR_NAME,
+} from '../constants';
+import { AppError } from '../types/error';
+
+export class InvalidRequestError extends Error implements AppError {
   statusCode: number;
 
-  constructor(message: string) {
+  constructor(public message: string) {
     super(message);
-    this.statusCode = 404;
+    this.name = INVALID_REQUEST_ERROR_NAME;
+    this.statusCode = INVALID_REQUEST_ERROR_CODE;
   }
 }

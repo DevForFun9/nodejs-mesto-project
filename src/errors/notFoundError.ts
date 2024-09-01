@@ -1,8 +1,15 @@
-export class ConflictError extends Error {
+import {
+  NOT_FOUND_ERROR_CODE,
+  NOT_FOUND_ERROR_NAME,
+} from '../constants';
+import { AppError } from '../types/error';
+
+export class NotFoundError extends Error implements AppError {
   statusCode: number;
 
-  constructor(message: string) {
+  constructor(public message: string) {
     super(message);
-    this.statusCode = 409;
+    this.name = NOT_FOUND_ERROR_NAME;
+    this.statusCode = NOT_FOUND_ERROR_CODE;
   }
 }

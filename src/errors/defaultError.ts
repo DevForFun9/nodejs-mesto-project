@@ -1,8 +1,15 @@
-export class ForbiddenError extends Error {
+import {
+  DEFAULT_ERROR_CODE,
+  DEFAULT_ERROR_NAME,
+} from '../constants';
+import { AppError } from '../types/error';
+
+export class DefaultError extends Error implements AppError {
   statusCode: number;
 
-  constructor(message: string) {
+  constructor(public message: string) {
     super(message);
-    this.statusCode = 403;
+    this.name = DEFAULT_ERROR_NAME;
+    this.statusCode = DEFAULT_ERROR_CODE;
   }
 }

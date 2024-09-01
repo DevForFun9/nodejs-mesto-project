@@ -1,8 +1,11 @@
-export class UnAuthError extends Error {
+import { AppError } from '../types/error';
+
+export class EmailExistError extends Error implements AppError {
   statusCode: number;
 
-  constructor(message: string) {
+  constructor(public message: string) {
     super(message);
-    this.statusCode = 401;
+    this.name = 'EmailExistError';
+    this.statusCode = 409;
   }
 }

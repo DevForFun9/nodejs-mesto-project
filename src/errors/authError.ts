@@ -1,8 +1,11 @@
-export class ValidationError extends Error {
+import { AppError } from '../types/error';
+
+export class AuthError extends Error implements AppError {
   statusCode: number;
 
-  constructor(message: string) {
+  constructor(public message: string) {
     super(message);
-    this.statusCode = 400;
+    this.name = 'AuthError';
+    this.statusCode = 401;
   }
 }
